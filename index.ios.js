@@ -30,54 +30,15 @@ class Youddress extends Component {
 
     this.state = {
       shareLinkContent: shareLinkContent,
-      isLoading: false,
-      message: '',
+      graphData: {},
     };
   }
-//
-//   _handleResponse(response) {
-//   this.setState({ isLoading: false , message: '' });
-//   if (response.application_response_code.substr(0, 1) === '1') {
-//     console.log('Properties found: ' + response.listings.length);
-//   } else {
-//     this.setState({ message: 'Location not recognized; please try again.'});
-//   }
-// }
-//
-//   componentDidMount(){
-//     AccessToken.getCurrentAccessToken().then(
-//       (data) => {
-//         let accessToken = data.accessToken
-//         console.log(accessToken.toString())
-//
-//         fetch('https://graph.facebook.com/me?access_token=' + accessToken.toString())
-//         .then(response => response.json())
-//         .then(json => this._handleResponse(json.response))
-//         .catch(error =>
-//            this.setState({
-//             isLoading: false,
-//             message: 'Something bad happened ' + error
-//          }));
-//       }
-//     )
-//
-//   }
 
-_responseInfoCallback(error: ?Object, result: ?Object) {
-  if (error) {
-    alert('Error fetching data: ' + error.toString());
-  } else {
-    console.log(result);
-    // this.setState({ message: 'Location not recognized; please try again.'});
-  }
-}
-
-  render() {
-
+  componentDidMount(){
     AccessToken.getCurrentAccessToken().then(
       (data) => {
         let accessToken = data.accessToken
-        console.log(accessToken.toString())
+        // console.log(accessToken.toString())
 
     const infoRequest = new GraphRequest(
     '/me',{
@@ -88,15 +49,37 @@ _responseInfoCallback(error: ?Object, result: ?Object) {
                     }
                   }
                 },
-    this._responseInfoCallback,
+    this._responseInfoCallback.bind(this),
   );
 
   new GraphRequestManager().addRequest(infoRequest).start();
 })
+  }
+
+
+_responseInfoCallback(error: ?Object, result: ?Object) {
+  if (error) {
+    alert('Error fetching data: ' + error.toString());
+  } else {
+    // console.log(result);
+    // this.setState( { graphData: result } )
+    this.setState( {
+       fbID: result.id,
+       fullName: `${result.first_name} ${result.last_name}`,
+       firstName: result.first_name,
+       lastName: result.last_name,
+       friends: result.friends,
+  } )
+}
+}
+
+  render() {
+
+
     return (
       <View style={styles.container}>
         <Login />
-        <Text>{this.state.message}</Text>
+        <Text>{ this.state.fullName } </Text>
       </View>
     );
   }
