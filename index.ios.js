@@ -1,6 +1,7 @@
 
 import React, { Component } from 'react';
 import Login from "./Login.js"
+import Friends from "./components/Friends.js"
 import {
   AppRegistry,
   StyleSheet,
@@ -30,7 +31,7 @@ class Youddress extends Component {
 
     this.state = {
       shareLinkContent: shareLinkContent,
-      graphData: {},
+      friends: [],
     };
   }
 
@@ -75,11 +76,11 @@ _responseInfoCallback(error: ?Object, result: ?Object) {
 
   render() {
 
-
     return (
       <View style={styles.container}>
         <Login />
-        <Text>{ this.state.fullName } </Text>
+        {/* <Text>{ this.state.fullName } </Text> */}
+        <Friends friends={this.state.friends}/>
       </View>
     );
   }
