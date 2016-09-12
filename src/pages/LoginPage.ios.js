@@ -30,11 +30,10 @@ constructor(){
 
   this.state = {
     shareLinkContent: shareLinkContent,
-    friends: [],
   };
 }
 
-componentWillMount(){
+componentDidMount(){
   AccessToken.getCurrentAccessToken().then(
     (data) => {
       let accessToken = data.accessToken

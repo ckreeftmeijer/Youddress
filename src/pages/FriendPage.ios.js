@@ -37,7 +37,7 @@ render() {
     return (
       <View style={styles.container}>
         <Friends friends={this.props.friends}/>
-        <Text>lkalalal</Text>
+        <Text></Text>
       </View>
     );
   }

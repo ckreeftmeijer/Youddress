@@ -25,7 +25,7 @@ var Login = React.createClass({
          AccessToken.getCurrentAccessToken().then(
            (data) => {
              let accessToken = data.accessToken
-             alert(accessToken.toString())
+            //  alert(accessToken.toString())
 
              const responseInfoCallback = (error, result) => {
                if (error) {
