@@ -4,12 +4,8 @@ import LoginPageNav from "./src/pages/LoginPage.ios"
 import {
   AppRegistry,
   StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
   NavigatorIOS,
 } from 'react-native';
-
 
 
 class Youddress extends Component {
@@ -33,8 +29,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 });
-
-
 
 
 

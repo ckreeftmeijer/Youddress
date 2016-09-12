@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import Login from "../components/Login.js"
-import FriendPage from "./FriendPage.ios"
-
+import Friends from "../components/Friends"
 import {
   AppRegistry,
   StyleSheet,
@@ -19,7 +17,7 @@ const {
   AccessToken,
 } = FBSDK;
 
-class LoginPageNav extends Component {
+class FriendPage extends Component {
 
 constructor(){
   super();
@@ -56,6 +54,7 @@ new GraphRequestManager().addRequest(infoRequest).start();
 })
 }
 
+
 _responseInfoCallback(error: ?Object, result: ?Object) {
 if (error) {
   alert('Error fetching data: ' + error.toString());
@@ -71,26 +70,18 @@ if (error) {
        lastName: result.last_name,
        friends: result.friends,
      } )
-    //  console.log(result.friends.data[0].name)
-     this.goDerper()
+
+     console.log(result.friends.data[0].name)
   }
 }
 
-
-goDerper() {
-    this.props.navigator.push({
-               title: 'Friends',
-               component: FriendPage,
-               passProps: {myElement: 'this could be your value!'}
-           });
-  }
 
   render() {
 
     return (
       <View style={styles.container}>
-        <Login />
-          {/* <Text>{ this.state.friendz } </Text> */}
+        <Friends friends={this.state.friends}/>
+        <Text>lkalalal</Text>
       </View>
     );
   }
@@ -103,12 +94,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
-    flexDirection: 'row',
-  },
-  shareText: {
-    fontSize: 20,
-    margin: 10,
   },
 });
 
-export default LoginPageNav
+export default FriendPage
