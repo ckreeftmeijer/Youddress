@@ -32,55 +32,11 @@ constructor(){
   };
 }
 
-componentWillMount(){
-  AccessToken.getCurrentAccessToken().then(
-    (data) => {
-      let accessToken = data.accessToken
-      // console.log(accessToken.toString())
 
-  const infoRequest = new GraphRequest(
-  '/me',{
-                accessToken: accessToken.toString(),
-                parameters: {
-                  fields: {
-                    string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
-                  }
-                }
-              },
-  this._responseInfoCallback.bind(this),
-);
-
-new GraphRequestManager().addRequest(infoRequest).start();
-})
-}
-
-
-_responseInfoCallback(error: ?Object, result: ?Object) {
-if (error) {
-  alert('Error fetching data: ' + error.toString());
-} else {
-  // console.log(result);
-  // console.log(result.friends);
-  // console.log(result.friends.data[0]);
-  // this.setState( { graphData: result } )
-    this.setState( {
-       fbID: result.id,
-       fullName: `${result.first_name} ${result.last_name}`,
-       firstName: result.first_name,
-       lastName: result.last_name,
-       friends: result.friends,
-     } )
-
-     console.log(result.friends.data[0].name)
-  }
-}
-
-
-  render() {
-
+render() {
     return (
       <View style={styles.container}>
-        <Friends friends={this.state.friends}/>
+        <Friends friends={this.props.friends}/>
         <Text>lkalalal</Text>
       </View>
     );

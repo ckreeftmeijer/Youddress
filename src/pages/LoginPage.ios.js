@@ -81,7 +81,7 @@ goDerper() {
     this.props.navigator.push({
                title: 'Friends',
                component: FriendPage,
-               passProps: {myElement: 'this could be your value!'}
+               passProps: {friends: this.state.friends}
            });
   }
 

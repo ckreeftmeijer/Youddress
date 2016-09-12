@@ -17,7 +17,8 @@ class Friends extends Component {
 
       <View>
         <Text>
-          {/* {console.log(myFriends)} */}
+          {console.log(this.props.friends.data)}
+          lala
         </Text>
       </View>
     )
