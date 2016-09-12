@@ -35,7 +35,7 @@ class Youddress extends Component {
     };
   }
 
-  componentDidMount(){
+  componentWillMount(){
     AccessToken.getCurrentAccessToken().then(
       (data) => {
         let accessToken = data.accessToken
@@ -63,15 +63,19 @@ _responseInfoCallback(error: ?Object, result: ?Object) {
     alert('Error fetching data: ' + error.toString());
   } else {
     // console.log(result);
+    // console.log(result.friends);
+    // console.log(result.friends.data[0]);
     // this.setState( { graphData: result } )
-    this.setState( {
-       fbID: result.id,
-       fullName: `${result.first_name} ${result.last_name}`,
-       firstName: result.first_name,
-       lastName: result.last_name,
-       friends: result.friends,
-  } )
-}
+      this.setState( {
+         fbID: result.id,
+         fullName: `${result.first_name} ${result.last_name}`,
+         firstName: result.first_name,
+         lastName: result.last_name,
+         friends: result.friends,
+       } )
+
+       console.log(result.friends.data[0].name)
+    }
 }
 
   render() {
@@ -80,6 +84,7 @@ _responseInfoCallback(error: ?Object, result: ?Object) {
       <View style={styles.container}>
         <Login />
         {/* <Text>{ this.state.fullName } </Text> */}
+          {/* <Text>{ this.state.friendz } </Text> */}
         <Friends friends={this.state.friends}/>
       </View>
     );

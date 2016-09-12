@@ -10,17 +10,15 @@ class Friends extends Component {
 
 
   render() {
-  const myFriends = this.props.friends.data
 
-for (var key in myFriends) {
-  console.log(Object.values(myFriends[key]))
-}
-
+    const myFriends = this.props.friends.data
 
     return (
 
       <View>
-    <Text>{console.log(myFriends)}</Text>
+        <Text>
+          {/* {console.log(myFriends)} */}
+        </Text>
       </View>
     )
   }
