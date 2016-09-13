@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Login from "../components/Login.js"
 import FriendPage from "./FriendPage.ios"
 
 import {
@@ -13,56 +12,70 @@ import {
 
 const FBSDK = require('react-native-fbsdk');
 const {
-  LoginButton,
   GraphRequest,
   GraphRequestManager,
   AccessToken,
+  LoginManager,
 } = FBSDK;
 
 class LoginPageNav extends Component {
 
-constructor(){
-  super();
-  const shareLinkContent = {
-    contentType: 'link',
-    contentUrl: "https://www.facebook.com/",
-  };
+// constructor(){
+//   super();
+//   const shareLinkContent = {
+//     contentType: 'link',
+//     contentUrl: "https://www.facebook.com/",
+//   };
+//
+//   this.state = {
+//
+//   };
+// }
 
-  this.state = {
-    shareLinkContent: shareLinkContent,
-  };
-}
 
-componentDidMount(){
-  AccessToken.getCurrentAccessToken().then(
-    (data) => {
-      let accessToken = data.accessToken
-      // console.log(accessToken.toString())
+  loginButton() {
+    var self = this
+   LoginManager.logInWithReadPermissions(['public_profile', 'user_friends']).then(
+    function(result) {
+      if (result.isCancelled) {
+        alert('Login cancelled');
+      } else {
+        self.getData()
+      }
+    },
+    function(error) {
+      alert('Login fail with error: ' + error);
+    }
+   )
+  }
 
-  const infoRequest = new GraphRequest(
-  '/me',{
-                accessToken: accessToken.toString(),
-                parameters: {
-                  fields: {
-                    string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
-                  }
-                }
-              },
-  this._responseInfoCallback.bind(this),
-);
 
-new GraphRequestManager().addRequest(infoRequest).start();
-})
-}
 
-_responseInfoCallback(error: ?Object, result: ?Object) {
-if (error) {
-  alert('Error fetching data: ' + error.toString());
-} else {
-  // console.log(result);
-  // console.log(result.friends);
-  // console.log(result.friends.data[0]);
-  // this.setState( { graphData: result } )
+  componentDidMount(){
+    AccessToken.getCurrentAccessToken().then(
+      (data) => {
+        let accessToken = data.accessToken
+        const infoRequest = new GraphRequest(
+        '/me',{
+                      accessToken: accessToken.toString(),
+                      parameters: {
+                        fields: {
+                          string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
+                        }
+                      }
+                    },
+            this._responseInfoCallback.bind(this),
+          );
+
+      new GraphRequestManager().addRequest(infoRequest).start();
+      })
+    }
+
+
+  _responseInfoCallback(error: ?Object, result: ?Object) {
+  if (error) {
+    alert('Error fetching data: ' + error.toString());
+  } else {
     this.setState( {
        fbID: result.id,
        fullName: `${result.first_name} ${result.last_name}`,
@@ -70,26 +83,29 @@ if (error) {
        lastName: result.last_name,
        friends: result.friends,
      } )
-    //  console.log(result.friends.data[0].name)
-     this.goDerper()
+
+       this.gotoFriends()
+
+    }
   }
-}
 
 
-goDerper() {
-    this.props.navigator.push({
-               title: 'Friends',
-               component: FriendPage,
-               passProps: {friends: this.state.friends}
-           });
+  gotoFriends() {
+      this.props.navigator.push({
+                 title: 'Friends',
+                 component: FriendPage,
+                 passProps: {friends: this.state.friends}
+             });
   }
 
   render() {
 
     return (
+
       <View style={styles.container}>
-        <Login />
-          {/* <Text>{ this.state.friendz } </Text> */}
+        <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
+          <Text>Login</Text>
+        </TouchableHighlight>
       </View>
     );
   }
@@ -103,10 +119,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
     flexDirection: 'row',
-  },
-  shareText: {
-    fontSize: 20,
-    margin: 10,
   },
 });
 

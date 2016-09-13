@@ -43,7 +43,7 @@ var Login = React.createClass({
                  accessToken: accessToken,
                  parameters: {
                    fields: {
-                     string: 'email,name,first_name,middle_name,last_name'
+                     string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
                    }
                  }
                },
