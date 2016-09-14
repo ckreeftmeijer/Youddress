@@ -128,9 +128,12 @@ class LoginPageNav extends Component {
     return (
 
       <View style={styles.container}>
-      { this.state.loading ? null : <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
+      {/* { this.state.loading ? null : <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
           <Text>Login</Text>
-        </TouchableHighlight>}
+        </TouchableHighlight>} */}
+        <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
+            <Text>Login</Text>
+          </TouchableHighlight>
       </View>
     );
   }
