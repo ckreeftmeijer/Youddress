@@ -15,7 +15,7 @@ constructor(){
   super();
 
   this.state = {
-    loading: true
+    loading: true,
   };
 }
 
