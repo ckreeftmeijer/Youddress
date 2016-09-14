@@ -20,18 +20,6 @@ const {
 
 class LoginPageNav extends Component {
 
-// constructor(){
-//   super();
-//   const shareLinkContent = {
-//     contentType: 'link',
-//     contentUrl: "https://www.facebook.com/",
-//   };
-//
-//   this.state = {
-//
-//   };
-// }
-
 
   loginButton() {
     var self = this
@@ -94,7 +82,8 @@ class LoginPageNav extends Component {
       this.props.navigator.push({
                  title: 'Friends',
                  component: FriendPage,
-                 passProps: {friends: this.state.friends}
+                 passProps: {friends: this.state.friends,
+                             navigator: this.props.navigator}
              });
   }
 
