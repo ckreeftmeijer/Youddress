@@ -72,26 +72,39 @@ class LoginPageNav extends Component {
        lastName: result.last_name,
        friends: result.friends,
      } )
-
-       this.gotoFriends()
-
+      this.newUser()
     }
+  }
+
+  newUser(){
+      let self = this
+
+      fetch("http://localhost:3000/users.json", {method: "GET"})
+        .then((response) => response.json())
+        .then((responseData) => {
+          let userCheck = responseData.filter(function( user ) {
+            return user.fbid == self.state.fbID;})
+            {userCheck.length > 0 ? self.gotoFriends() : self.gotoSignUp()}
+        })
+        .done();
   }
 
 
   gotoFriends() {
-      // this.props.navigator.push({
-      //            title: 'Friends',
-      //            component: FriendPage,
-      //            passProps: {friends: this.state.friends,
-      //                        navigator: this.props.navigator}
-      //        });
-
       this.props.navigator.push({
-                 title: 'SignUp',
-                 component: SignUpPage,
-                 passProps: {fbID: this.state.fbID, fullName: this.state.fullName}
+                 title: 'Friends',
+                 component: FriendPage,
+                 passProps: {friends: this.state.friends,
+                             navigator: this.props.navigator}
              });
+  }
+
+  gotoSignUp() {
+    this.props.navigator.push({
+               title: 'SignUp',
+               component: SignUpPage,
+               passProps: {fbID: this.state.fbID, fullName: this.state.fullName}
+           });
   }
 
   render() {

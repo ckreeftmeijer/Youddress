@@ -65,9 +65,6 @@ submitForm(){
           <InputField ref='address2' placeholder='Address line 2 (optional)'/>
           <InputField ref='city' placeholder='City'/>
           <InputField ref='postal' placeholder='Postal Code'/>
-
-          <Separator />
-
           <PickerField ref='country'
             label='Country'
             options={{
@@ -75,14 +72,13 @@ submitForm(){
               NL: 'The Netherlands',
               US: 'The United States of America'
             }}/>
-          </Form>
+        </Form>
 
           <TouchableHighlight onPress={() => this.submitForm()}>
-          <Text>Submit</Text>
-        </TouchableHighlight>
+            <Text>Submit</Text>
+          </TouchableHighlight>
 
-          <Text>{JSON.stringify(this.state.formData)}</Text>
-    </ScrollView>
+      </ScrollView>
 
     )
   }
