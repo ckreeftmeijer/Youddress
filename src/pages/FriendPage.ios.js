@@ -1,42 +1,46 @@
 import React, { Component } from 'react';
 import Friends from "../components/Friends"
 import {
-  AppRegistry,
   StyleSheet,
   Text,
   TouchableHighlight,
   View,
 } from 'react-native';
+import jQuery from 'jquery';
 
-
-const FBSDK = require('react-native-fbsdk');
-const {
-  LoginButton,
-  GraphRequest,
-  GraphRequestManager,
-  AccessToken,
-} = FBSDK;
 
 class FriendPage extends Component {
 
 constructor(){
   super();
-  const shareLinkContent = {
-    contentType: 'link',
-    contentUrl: "https://www.facebook.com/",
-  };
 
   this.state = {
-    shareLinkContent: shareLinkContent,
-    friends: [],
+    loading: true
   };
+}
+
+componentDidMount(){
+
+
+  fetch("http://localhost:3000/users.json", {method: "GET"})
+    .then((response) => response.json())
+    .then((responseData) => {
+      this.setState( {
+        users: responseData,
+        loading: false} )
+    })
+
+    .done();
 }
 
 
 render() {
+
+
     return (
       <View style={styles.container}>
-        <Friends friends={this.props.friends}/>
+      {this.state.loading ? null :
+        <Friends friends={this.props.friends} users={this.state.users}/>}
         <Text></Text>
       </View>
     );
