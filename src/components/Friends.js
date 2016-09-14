@@ -10,18 +10,15 @@ import AddressPage from "../pages/AddressPage.ios"
 
 class Friends extends Component {
 
-  constructor(){
-    super();
-  }
-
 
   goToAddress(id) {
       this.props.navigator.push({
                  title: 'Address',
                  component: AddressPage,
+                 navigationBarHidden: false,
                  passProps: {userId: id,
                             users: this.props.users}
-             });
+      });
 
   }
 

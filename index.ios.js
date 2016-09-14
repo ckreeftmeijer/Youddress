@@ -16,6 +16,7 @@ class Youddress extends Component {
     return (
       <NavigatorIOS
              style={styles.container}
+             navigationBarHidden={true}
              initialRoute={{
                title: 'Login Page',
                component: LoginPageNav,

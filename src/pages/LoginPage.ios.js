@@ -25,6 +25,7 @@ class LoginPageNav extends Component {
     super(props);
     this.state = {
       loading: true,
+      navigationBarHidden: true,
     }
   }
 

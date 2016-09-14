@@ -10,6 +10,7 @@ import jQuery from 'jquery';
 
 class AddressPage extends Component {
 
+
 render() {
   let self = this
 
