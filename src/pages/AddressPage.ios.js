@@ -15,7 +15,6 @@ render() {
 
   let address = this.props.users.filter(function( user ) {
     return user.fbid == self.props.userId;})
-    console.log(address)
     return (
       <View style={styles.container}>
 

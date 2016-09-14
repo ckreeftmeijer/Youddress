@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FriendPage from "./FriendPage.ios"
+import SignUpPage from "./SignUpPage.ios"
 
 import {
   AppRegistry,
@@ -19,6 +20,13 @@ const {
 } = FBSDK;
 
 class LoginPageNav extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      loading: true,
+    }
+  }
 
 
   loginButton() {
@@ -71,10 +79,26 @@ class LoginPageNav extends Component {
        lastName: result.last_name,
        friends: result.friends,
      } )
-
-       this.gotoFriends()
-
+      this.newUser()
     }
+  }
+
+  newUser(){
+      let self = this
+
+      fetch("http://localhost:3000/users.json", {method: "GET"})
+        .then((response) => response.json())
+        .then((responseData) => {
+
+          this.setState( {
+             loading: false,
+           } )
+
+          let userCheck = responseData.filter(function( user ) {
+            return user.fbid == self.state.fbID;})
+            {userCheck.length > 0 ? self.gotoFriends() : self.gotoSignUp()}
+        })
+        .done();
   }
 
 
@@ -87,14 +111,25 @@ class LoginPageNav extends Component {
              });
   }
 
+  gotoSignUp() {
+    this.props.navigator.push({
+               title: 'SignUp',
+               component: SignUpPage,
+               passProps: {friends: this.state.friends,
+                           fbID: this.state.fbID,
+                           fullName: this.state.fullName,
+                           navigator: this.props.navigator}
+           });
+  }
+
   render() {
 
     return (
 
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
+      { this.state.loading ? null : <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
           <Text>Login</Text>
-        </TouchableHighlight>
+        </TouchableHighlight>}
       </View>
     );
   }
