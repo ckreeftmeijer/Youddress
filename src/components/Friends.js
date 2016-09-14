@@ -18,14 +18,18 @@ class Friends extends Component {
               </Text>
     });
 
+    let users = this.props.users.map(function(user) {
+        return <Text key={user.id}>{user.name}{user.address1}</Text>;
+      });
+
 
     return (
 
       <View>
 
           {friendlist}
-          {console.log(this.props.friends.data[0].picture.data.url)}
 
+          {users}
 
       </View>
     )
