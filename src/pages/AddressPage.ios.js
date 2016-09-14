@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Friends from "../components/Friends"
-import AddressPage from "./AddressPage"
 import {
   StyleSheet,
   Text,
@@ -42,6 +41,7 @@ render() {
       <View style={styles.container}>
       {this.state.loading ? null :
         <Friends friends={this.props.friends} users={this.state.users}/>}
+        <Text></Text>
       </View>
     );
   }
