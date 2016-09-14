@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import Friends from "../components/Friends"
 import {
   StyleSheet,
   Text,
@@ -9,39 +8,23 @@ import {
 import jQuery from 'jquery';
 
 
-class FriendPage extends Component {
-
-constructor(){
-  super();
-
-  this.state = {
-    loading: true
-  };
-}
-
-componentDidMount(){
-
-
-  fetch("http://localhost:3000/users.json", {method: "GET"})
-    .then((response) => response.json())
-    .then((responseData) => {
-      this.setState( {
-        users: responseData,
-        loading: false} )
-    })
-
-    .done();
-}
-
+class AddressPage extends Component {
 
 render() {
+  let self = this
 
-
+  let address = this.props.users.filter(function( user ) {
+    return user.fbid == self.props.userId;})
+    console.log(address)
     return (
       <View style={styles.container}>
-      {this.state.loading ? null :
-        <Friends friends={this.props.friends} users={this.state.users}/>}
-        <Text></Text>
+
+        <Text>{address[0].name}</Text>
+        <Text>{address[0].address1}</Text>
+        <Text>{address[0].address2}</Text>
+        <Text>{address[0].postal}</Text>
+        <Text>{address[0].city}</Text>
+        <Text>{address[0].country}</Text>
       </View>
     );
   }
@@ -57,4 +40,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FriendPage
+export default AddressPage

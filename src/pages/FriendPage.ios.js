@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import Friends from "../components/Friends"
-import AddressPage from "./AddressPage"
+import AddressPage from "./AddressPage.ios"
 import {
   StyleSheet,
   Text,
   TouchableHighlight,
   View,
 } from 'react-native';
-import jQuery from 'jquery';
 
 
 class FriendPage extends Component {
@@ -41,7 +40,7 @@ render() {
     return (
       <View style={styles.container}>
       {this.state.loading ? null :
-        <Friends friends={this.props.friends} users={this.state.users}/>}
+        <Friends friends={this.props.friends} users={this.state.users} navigator={this.props.navigator}/>}
       </View>
     );
   }
