@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import FriendPage from "./FriendPage.ios"
+import SignUpPage from "./SignUpPage.ios"
 
 import {
   AppRegistry,
@@ -79,11 +80,17 @@ class LoginPageNav extends Component {
 
 
   gotoFriends() {
+      // this.props.navigator.push({
+      //            title: 'Friends',
+      //            component: FriendPage,
+      //            passProps: {friends: this.state.friends,
+      //                        navigator: this.props.navigator}
+      //        });
+
       this.props.navigator.push({
-                 title: 'Friends',
-                 component: FriendPage,
-                 passProps: {friends: this.state.friends,
-                             navigator: this.props.navigator}
+                 title: 'SignUp',
+                 component: SignUpPage,
+                 passProps: {fbID: this.state.fbID, fullName: this.state.fullName}
              });
   }
 
