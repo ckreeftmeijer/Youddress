@@ -47,6 +47,16 @@ submitForm(){
                   country: country,
         })
     })
+    this.gotoFriends()
+}
+
+gotoFriends() {
+    this.props.navigator.push({
+               title: 'Friends',
+               component: FriendPage,
+               passProps: {friends: this.props.friends,
+                           navigator: this.props.navigator}
+           });
 }
 
   render() {

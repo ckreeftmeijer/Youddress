@@ -21,6 +21,13 @@ const {
 
 class LoginPageNav extends Component {
 
+  constructor(props){
+    super(props);
+    this.state = {
+      loading: true,
+    }
+  }
+
 
   loginButton() {
     var self = this
@@ -82,6 +89,11 @@ class LoginPageNav extends Component {
       fetch("http://localhost:3000/users.json", {method: "GET"})
         .then((response) => response.json())
         .then((responseData) => {
+
+          this.setState( {
+             loading: false,
+           } )
+
           let userCheck = responseData.filter(function( user ) {
             return user.fbid == self.state.fbID;})
             {userCheck.length > 0 ? self.gotoFriends() : self.gotoSignUp()}
@@ -103,7 +115,10 @@ class LoginPageNav extends Component {
     this.props.navigator.push({
                title: 'SignUp',
                component: SignUpPage,
-               passProps: {fbID: this.state.fbID, fullName: this.state.fullName}
+               passProps: {friends: this.state.friends,
+                           fbID: this.state.fbID,
+                           fullName: this.state.fullName,
+                           navigator: this.props.navigator}
            });
   }
 
@@ -112,9 +127,9 @@ class LoginPageNav extends Component {
     return (
 
       <View style={styles.container}>
-        <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
+      { this.state.loading ? null : <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
           <Text>Login</Text>
-        </TouchableHighlight>
+        </TouchableHighlight>}
       </View>
     );
   }
