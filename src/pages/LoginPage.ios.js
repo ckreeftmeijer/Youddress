@@ -26,7 +26,7 @@ class LoginPageNav extends Component {
     super(props);
     this.state = {
       navigationBarHidden: true,
-      loading: false,
+      loading: true,
     }
   }
 
@@ -51,17 +51,20 @@ class LoginPageNav extends Component {
   }
 
 componentDidMount(){
+
   AccessToken.getCurrentAccessToken().then(
     (data) => {
-      let accessToken = data.accessToken
-        {accessToken.length > 0 ? this.getData() : console.log(false)}
+        {data == null ?
+          this.setState( {
+               loading: false,
+             } )
+             : this.getData()}
     }
   )
 }
 
 
   getData(){
-    console.log("test")
       AccessToken.getCurrentAccessToken().then(
         (data) => {
           let accessToken = data.accessToken
@@ -111,9 +114,6 @@ componentDidMount(){
 
 
   gotoFriends() {
-    this.setState( {
-       loading: false,
-     } )
       this.props.navigator.push({
                  title: 'Friends',
                  component: FriendPage,
@@ -123,9 +123,6 @@ componentDidMount(){
   }
 
   gotoSignUp() {
-    this.setState( {
-       loading: false,
-     } )
     this.props.navigator.push({
                title: 'SignUp',
                component: SignUpPage,
