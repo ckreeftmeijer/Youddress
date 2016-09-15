@@ -8,7 +8,8 @@ import {
   Text,
   TouchableHighlight,
   View,
-  Image
+  Image,
+  ActivityIndicator,
 } from 'react-native';
 
 
@@ -73,7 +74,7 @@ componentDidMount(){
                         accessToken: accessToken.toString(),
                         parameters: {
                           fields: {
-                            string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
+                            string: 'name,first_name,middle_name,last_name,friends{name,picture}'
                           }
                         }
                       },
@@ -141,7 +142,11 @@ componentDidMount(){
         <Image source={{uri: 'https://res.cloudinary.com/ckreeftmeijer/image/upload/v1473930385/textlogo_rgcpia.png'}}
           style={styles.logo}/>
 
-        {this.state.loading? null :
+        {this.state.loading?
+          <ActivityIndicator
+              animating={true}
+              style={[styles.centering, {height: 80}]}
+              size="large"/>  :
           <TouchableHighlight
               onPress={() => this.loginButton()}
               underlayColor="white"
