@@ -8,6 +8,7 @@ import {
   Text,
   TouchableHighlight,
   View,
+  Image
 } from 'react-native';
 
 
@@ -25,7 +26,7 @@ class LoginPageNav extends Component {
     super(props);
     this.state = {
       navigationBarHidden: true,
-      loading: false,
+      loading: true,
     }
   }
 
@@ -50,19 +51,20 @@ class LoginPageNav extends Component {
   }
 
 componentDidMount(){
+
   AccessToken.getCurrentAccessToken().then(
     (data) => {
-      let accessToken = data.accessToken
-        {accessToken.length() > 0 ? this.getData() : console.log(false)}
+        {data == null ?
+          this.setState( {
+               loading: false,
+             } )
+             : this.getData()}
     }
   )
-
-
 }
 
 
   getData(){
-    console.log("test")
       AccessToken.getCurrentAccessToken().then(
         (data) => {
           let accessToken = data.accessToken
@@ -103,9 +105,6 @@ componentDidMount(){
       fetch("http://localhost:3000/users.json", {method: "GET"})
         .then((response) => response.json())
         .then((responseData) => {
-          self.setState( {
-             loading: false,
-           } )
           let userCheck = responseData.filter(function( user ) {
             return user.fbid == self.state.fbID;})
             {userCheck.length > 0 ? self.gotoFriends() : self.gotoSignUp()}
@@ -139,9 +138,15 @@ componentDidMount(){
     return (
 
       <View style={styles.container}>
+        <Image source={{uri: 'https://res.cloudinary.com/ckreeftmeijer/image/upload/v1473930385/textlogo_rgcpia.png'}}
+          style={styles.logo}/>
+
         {this.state.loading? null :
-          <TouchableHighlight onPress={() => this.loginButton()} underlayColor="blue">
-            <Text>Login</Text>
+          <TouchableHighlight
+              onPress={() => this.loginButton()}
+              underlayColor="white"
+              style={styles.button}>
+            <Text style={styles.fbtext}>Login with Facebook</Text>
           </TouchableHighlight>}
       </View>
     );
@@ -154,9 +159,25 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-    flexDirection: 'row',
+    backgroundColor: '#1EC5E3',
+    flexDirection: 'column',
   },
+  button: {
+    width: 180,
+    height: 45,
+    backgroundColor: '#3b5998',
+    alignItems: 'center',
+   justifyContent: 'center',
+  },
+  fbtext: {
+    color: '#fff',
+    fontWeight: 'bold'
+  },
+  logo: {
+    height: 30,
+    width: 200,
+    marginBottom: 100
+  }
 });
 
 export default LoginPageNav
