@@ -9,8 +9,7 @@ import {
   ScrollView,
   TouchableHighlight
 } from 'react-native';
-import { Form,InputField, PickerField,
-} from 'react-native-form-generator';
+import { Form,InputField, PickerField } from 'react-native-form-generator';
 
 
 
