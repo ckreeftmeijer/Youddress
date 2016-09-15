@@ -23,7 +23,7 @@ constructor(){
 componentDidMount(){
 
 
-  fetch("http://localhost:3000/users.json", {method: "GET"})
+  fetch("https://peaceful-stream-54894.herokuapp.com/users.json", {method: "GET"})
     .then((response) => response.json())
     .then((responseData) => {
       this.setState( {

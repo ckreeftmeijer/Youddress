@@ -102,7 +102,7 @@ componentDidMount(){
   newUser(){
       let self = this
 
-      fetch("http://localhost:3000/users.json", {method: "GET"})
+      fetch("https://peaceful-stream-54894.herokuapp.com/users.json", {method: "GET"})
         .then((response) => response.json())
         .then((responseData) => {
           let userCheck = responseData.filter(function( user ) {
