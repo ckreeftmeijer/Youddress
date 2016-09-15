@@ -52,13 +52,12 @@ class Friends extends Component {
 
 const styles = StyleSheet.create({
   friendwrapper: {
-    backgroundColor: 'white',
+
     flex: 1,
     paddingTop: 50,
     marginTop: 20,
     width: 300,
-    borderWidth: 4,
-    borderColor: '#d6d7da'
+
   },
   frienditem: {
     marginLeft: 10,
@@ -66,6 +65,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     flexDirection:'row',
     marginBottom: 5,
+    backgroundColor: 'white',
+    borderWidth: 1,
+    borderColor: '#d6d7da'
   },
   friendname: {
     marginLeft: 15,
@@ -74,7 +76,6 @@ const styles = StyleSheet.create({
   friendimg: {
       width: 50,
       height: 50,
-      borderRadius: 25,
     },
 });
 
