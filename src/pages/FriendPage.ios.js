@@ -41,7 +41,6 @@ render() {
 
     return (
       <View style={styles.container}>
-        {console.log(this.props.friends)}
       {this.state.loading ?
         <ActivityIndicator
             animating={true}
