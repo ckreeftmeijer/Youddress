@@ -41,19 +41,19 @@ render() {
 
     return (
       <View style={styles.container}>
-        {console.log(this.props.friends)}
+
       {this.state.loading ?
         <ActivityIndicator
             animating={true}
             style={[styles.centering, {height: 80}]}
             size="large"/> :
         <View style={styles.frienddiv}>
-        <Image source={{uri: 'https://res.cloudinary.com/ckreeftmeijer/image/upload/v1473930385/textlogo_rgcpia.png'}}
-          style={styles.logo}/>
-        <Friends
-            friends={this.props.friends}
-            users={this.state.users}
-            navigator={this.props.navigator}/>
+            <Image source={{uri: 'https://res.cloudinary.com/ckreeftmeijer/image/upload/v1473930385/textlogo_rgcpia.png'}}
+              style={styles.logo}/>
+            <Friends
+                friends={this.props.friends}
+                users={this.state.users}
+                navigator={this.props.navigator}/>
           </View>}
 
       </View>

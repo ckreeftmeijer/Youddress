@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
-  TouchableHighlight,
   View,
   Image,
 } from 'react-native';

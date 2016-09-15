@@ -9,9 +9,7 @@ import {
   ScrollView,
   TouchableHighlight
 } from 'react-native';
-import { Form,
-  Separator,InputField, LinkField,
-  SwitchField, PickerField,DatePickerField,TimePickerField
+import { Form,InputField, PickerField,
 } from 'react-native-form-generator';
 
 
@@ -31,7 +29,7 @@ class SignUp extends Component {
 
 submitForm(){
   const { address1, address2, city, postal, country } = this.state.formData
-    fetch('http://localhost:3000/users.json', {
+    fetch('https://peaceful-stream-54894.herokuapp.com/users.json', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
