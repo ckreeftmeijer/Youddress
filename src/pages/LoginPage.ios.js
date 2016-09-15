@@ -24,19 +24,22 @@ class LoginPageNav extends Component {
   constructor(props){
     super(props);
     this.state = {
-      loading: true,
       navigationBarHidden: true,
+      loading: false,
     }
   }
 
 
   loginButton() {
-    var self = this
+   let self = this
    LoginManager.logInWithReadPermissions(['public_profile', 'user_friends']).then(
     function(result) {
       if (result.isCancelled) {
         alert('Login cancelled');
       } else {
+        self.setState( {
+           loading: true,
+         } )
         self.getData()
       }
     },
@@ -46,28 +49,38 @@ class LoginPageNav extends Component {
    )
   }
 
-
-
-  componentDidMount(){
-    AccessToken.getCurrentAccessToken().then(
-      (data) => {
-        let accessToken = data.accessToken
-        const infoRequest = new GraphRequest(
-        '/me',{
-                      accessToken: accessToken.toString(),
-                      parameters: {
-                        fields: {
-                          string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
-                        }
-                      }
-                    },
-            this._responseInfoCallback.bind(this),
-          );
-
-      new GraphRequestManager().addRequest(infoRequest).start();
-      })
+componentDidMount(){
+  AccessToken.getCurrentAccessToken().then(
+    (data) => {
+      let accessToken = data.accessToken
+        {accessToken.length() > 0 ? this.getData() : console.log(false)}
     }
+  )
 
+
+}
+
+
+  getData(){
+    console.log("test")
+      AccessToken.getCurrentAccessToken().then(
+        (data) => {
+          let accessToken = data.accessToken
+          const infoRequest = new GraphRequest(
+          '/me',{
+                        accessToken: accessToken.toString(),
+                        parameters: {
+                          fields: {
+                            string: 'email,name,first_name,middle_name,last_name,friends{name,picture}'
+                          }
+                        }
+                      },
+              this._responseInfoCallback.bind(this),
+            );
+
+        new GraphRequestManager().addRequest(infoRequest).start();
+        })
+    }
 
   _responseInfoCallback(error: ?Object, result: ?Object) {
   if (error) {
@@ -90,11 +103,9 @@ class LoginPageNav extends Component {
       fetch("http://localhost:3000/users.json", {method: "GET"})
         .then((response) => response.json())
         .then((responseData) => {
-
-          this.setState( {
+          self.setState( {
              loading: false,
            } )
-
           let userCheck = responseData.filter(function( user ) {
             return user.fbid == self.state.fbID;})
             {userCheck.length > 0 ? self.gotoFriends() : self.gotoSignUp()}
@@ -128,12 +139,10 @@ class LoginPageNav extends Component {
     return (
 
       <View style={styles.container}>
-      {/* { this.state.loading ? null : <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
-          <Text>Login</Text>
-        </TouchableHighlight>} */}
-        <TouchableHighlight onPress={this.loginButton} underlayColor="blue">
+        {this.state.loading? null :
+          <TouchableHighlight onPress={() => this.loginButton()} underlayColor="blue">
             <Text>Login</Text>
-          </TouchableHighlight>
+          </TouchableHighlight>}
       </View>
     );
   }
