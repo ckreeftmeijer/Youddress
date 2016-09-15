@@ -53,11 +53,9 @@ componentDidMount(){
   AccessToken.getCurrentAccessToken().then(
     (data) => {
       let accessToken = data.accessToken
-        {accessToken.length() > 0 ? this.getData() : console.log(false)}
+        {accessToken.length > 0 ? this.getData() : console.log(false)}
     }
   )
-
-
 }
 
 

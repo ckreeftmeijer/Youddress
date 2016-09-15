@@ -6,6 +6,7 @@ import {
   Text,
   TouchableHighlight,
   View,
+  Image,
 } from 'react-native';
 
 
@@ -39,6 +40,7 @@ render() {
 
     return (
       <View style={styles.container}>
+        <Text style={styles.logo}>YOUDDRESS</Text>
       {this.state.loading ? null :
         <Friends friends={this.props.friends} users={this.state.users} navigator={this.props.navigator}/>}
       </View>
@@ -52,8 +54,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#1EC5E3',
   },
+  logo: {
+    marginTop: 30,
+    fontSize: 40,
+    color: 'white',
+    fontWeight: 'bold',
+  }
 });
 
 export default FriendPage
