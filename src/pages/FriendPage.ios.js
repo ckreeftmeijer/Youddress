@@ -41,7 +41,6 @@ render() {
 
     return (
       <View style={styles.container}>
-
       {this.state.loading ?
         <ActivityIndicator
             animating={true}
