@@ -149,7 +149,7 @@ componentDidMount(){
               size="large"/>  :
           <TouchableHighlight
               onPress={() => this.loginButton()}
-              underlayColor="white"
+              underlayColor="#617db5"
               style={styles.button}>
             <Text style={styles.fbtext}>Login with Facebook</Text>
           </TouchableHighlight>}
