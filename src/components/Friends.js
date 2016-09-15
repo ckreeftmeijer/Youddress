@@ -12,13 +12,14 @@ import AddressPage from "../pages/AddressPage.ios"
 class Friends extends Component {
 
 
-  goToAddress(id) {
+  goToAddress(id, imgurl) {
       this.props.navigator.push({
                  title: 'Address',
                  component: AddressPage,
                  navigationBarHidden: false,
                  passProps: {userId: id,
-                            users: this.props.users}
+                            users: this.props.users,
+                            image: imgurl}
       });
 
   }
@@ -34,7 +35,7 @@ class Friends extends Component {
                   style={styles.friendimg}/>
                 <Text
                   style={styles.friendname}
-                  onPress={_ => self.goToAddress(friend.id)}>{friend.name}
+                  onPress={_ => self.goToAddress(friend.id, friend.picture.data.url)}>{friend.name}
                 </Text>
             </View>
     });

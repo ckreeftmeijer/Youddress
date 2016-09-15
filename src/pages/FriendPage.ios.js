@@ -40,7 +40,9 @@ render() {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.logo}>YOUDDRESS</Text>
+      <Image source={{uri: 'https://res.cloudinary.com/ckreeftmeijer/image/upload/v1473930385/textlogo_rgcpia.png'}}
+        style={styles.logo}/>
+        {console.log(this.props.friends)}
       {this.state.loading ? null :
         <Friends friends={this.props.friends} users={this.state.users} navigator={this.props.navigator}/>}
       </View>
@@ -58,9 +60,8 @@ const styles = StyleSheet.create({
   },
   logo: {
     marginTop: 30,
-    fontSize: 40,
-    color: 'white',
-    fontWeight: 'bold',
+    height: 30,
+    width: 200,
   }
 });
 
