@@ -18,57 +18,49 @@ const {
 
 class FriendPage extends Component {
 
-constructor(){
-  super();
+  constructor(){
+    super();
+    this.state = {
+      loading: true,
+    };
+  }
 
-  this.state = {
-    loading: true,
-  };
-}
+  componentDidMount(){
 
-componentDidMount(){
+    fetch("https://peaceful-stream-54894.herokuapp.com/users.json", {method: "GET"})
+      .then((response) => response.json())
+      .then((responseData) => {
+        this.setState( {
+          users: responseData,
+          loading: false} )
+      })
+      .done();
+  }
 
+  handleLogout(){
+    LoginManager.logOut()
+    this.backtoLogin()
+  }
 
-  fetch("https://peaceful-stream-54894.herokuapp.com/users.json", {method: "GET"})
-    .then((response) => response.json())
-    .then((responseData) => {
-      this.setState( {
-        users: responseData,
-        loading: false} )
-    })
-
-    .done();
-}
-
-handleLogout(){
-  LoginManager.logOut()
-  this.backtoLogin()
-
-}
-
-backtoLogin() {
-    this.props.navigator.push({
-               title: 'Login',
-               component: LoginPage,
-           });
-}
-
-
+  backtoLogin() {
+      this.props.navigator.push({
+                 title: 'Login',
+                 component: LoginPage,
+      });
+  }
 
 render() {
 
-
     return (
       <View style={styles.container}>
-      {this.state.loading ?
 
+      {this.state.loading ?
         <ActivityIndicator
             animating={true}
             style={[styles.centering, {height: 80}]}
             size="large"/> :
 
         <View style={styles.frienddiv}>
-
             <Image source={{uri: 'https://res.cloudinary.com/ckreeftmeijer/image/upload/v1473930385/textlogo_rgcpia.png'}}
               style={styles.logo}/>
             <Friends
@@ -81,9 +73,9 @@ render() {
                 style={styles.button}>
               <Text style={styles.fbtext}>Logout</Text>
             </TouchableHighlight>
-          </View>}
-
-      </View>
+      </View>}
+      
+    </View>
     );
   }
 }

@@ -24,37 +24,37 @@ class SignUp extends Component {
 
   handleFormChange(formData){
     this.setState({formData:formData})
-}
+  }
 
-submitForm(){
-  const { address1, address2, city, postal, country } = this.state.formData
-    fetch('https://peaceful-stream-54894.herokuapp.com/users.json', {
-        method: 'POST',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-                  fbid: this.props.fbID,
-                  name: this.props.fullName,
-                  address1: address1,
-                  address2: address2,
-                  city: city,
-                  postal: postal,
-                  country: country,
-        })
-    })
-    this.gotoFriends()
-}
+  submitForm(){
+    const { address1, address2, city, postal, country } = this.state.formData
+      fetch('https://peaceful-stream-54894.herokuapp.com/users.json', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+                    fbid: this.props.fbID,
+                    name: this.props.fullName,
+                    address1: address1,
+                    address2: address2,
+                    city: city,
+                    postal: postal,
+                    country: country,
+          })
+      })
+      this.gotoFriends()
+  }
 
-gotoFriends() {
-    this.props.navigator.push({
-               title: 'Friends',
-               component: FriendPage,
-               passProps: {friends: this.props.friends,
-                           navigator: this.props.navigator}
-           });
-}
+  gotoFriends() {
+      this.props.navigator.push({
+                 title: 'Friends',
+                 component: FriendPage,
+                 passProps: {friends: this.props.friends,
+                             navigator: this.props.navigator}
+             });
+  }
 
   render() {
 
@@ -83,12 +83,12 @@ gotoFriends() {
                   BE: 'Belgium',
                   US: 'The United States of America'
                 }}/>
-            </Form>
-
+            
             <TouchableHighlight style={styles.button} onPress={() => this.submitForm()}>
               <Text>Submit</Text>
             </TouchableHighlight>
-          </ScrollView>
+          </Form>
+        </ScrollView>
       </View>
     )
   }
@@ -107,12 +107,11 @@ const styles = StyleSheet.create({
   },
   form: {
     marginTop: 20,
-    borderWidth: 4,
-    borderColor: '#d6d7da',
   },
   button: {
-    width: 330,
+    width: 323,
     height: 45,
+    marginTop: 30,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#1EC5E3',

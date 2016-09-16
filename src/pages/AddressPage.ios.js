@@ -16,6 +16,7 @@ render() {
 
   let address = this.props.users.filter(function( user ) {
     return user.fbid == self.props.userId;})
+    
     return (
       <View style={styles.container}>
       <Image source={{uri: this.props.image}}
