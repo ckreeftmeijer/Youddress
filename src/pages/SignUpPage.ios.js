@@ -60,35 +60,35 @@ gotoFriends() {
 
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>SIGN UP</Text>
-        <ScrollView keyboardShouldPersistTaps={true} style={styles.view}>
-          <Form
-            ref='registrationForm'
-            onChange={this.handleFormChange.bind(this)}
-            label="Personal Information"
-            style={styles.form}>
+         <ScrollView keyboardShouldPersistTaps={true} style={styles.view}>
+          <Text style={styles.header}>SIGN UP</Text>
+            <Form
+              ref='registrationForm'
+              onChange={this.handleFormChange.bind(this)}
+              label="Personal Information"
+              style={styles.form}>
 
-            <InputField ref='address1' placeholder='Address line 1'/>
-            <InputField ref='address2' placeholder='Address line 2 (optional)'/>
-            <InputField ref='city' placeholder='City'/>
-            <InputField ref='postal' placeholder='Postal Code'/>
-            <PickerField ref='country'
-              label='Country'
-              options={{
-                "": '',
-                NL: 'The Netherlands',
-                DE: 'Germany',
-                SP: 'Spain',
-                CA: 'Canada',
-                BE: 'Belgium',
-                US: 'The United States of America'
-              }}/>
-          </Form>
-        </ScrollView>
-        <TouchableHighlight style={styles.button} onPress={() => this.submitForm()}>
-          <Text>Submit</Text>
-        </TouchableHighlight>
+              <InputField ref='address1' placeholder='Address line 1'/>
+              <InputField ref='address2' placeholder='Address line 2 (optional)'/>
+              <InputField ref='city' placeholder='City'/>
+              <InputField ref='postal' placeholder='Postal Code'/>
+              <PickerField ref='country'
+                label='Country'
+                options={{
+                  "": '',
+                  NL: 'The Netherlands',
+                  DE: 'Germany',
+                  SP: 'Spain',
+                  CA: 'Canada',
+                  BE: 'Belgium',
+                  US: 'The United States of America'
+                }}/>
+            </Form>
 
+            <TouchableHighlight style={styles.button} onPress={() => this.submitForm()}>
+              <Text>Submit</Text>
+            </TouchableHighlight>
+          </ScrollView>
       </View>
     )
   }
@@ -122,7 +122,8 @@ const styles = StyleSheet.create({
     color: '#1EC5E3',
     fontWeight: 'bold',
     fontSize: 40,
-    marginTop: 50
+    marginTop: 50,
+    alignSelf: 'center',
   }
 });
 export default SignUp
