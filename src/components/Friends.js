@@ -11,7 +11,6 @@ import AddressPage from "../pages/AddressPage.ios"
 
 class Friends extends Component {
 
-
   goToAddress(id, imgurl) {
       this.props.navigator.push({
                  title: 'Address',
@@ -52,12 +51,10 @@ class Friends extends Component {
 
 const styles = StyleSheet.create({
   friendwrapper: {
-
     flex: 1,
     paddingTop: 50,
     marginTop: 20,
     width: 300,
-
   },
   frienditem: {
     marginLeft: 10,
@@ -74,9 +71,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   friendimg: {
-      width: 50,
-      height: 50,
-    },
+    width: 50,
+    height: 50,
+  },
 });
 
 export default Friends
