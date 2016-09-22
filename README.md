@@ -1,6 +1,6 @@
 # Youddress
 
-![Screenshot](https://media.giphy.com/media/26ufaMEjWu8MTKS0E/giphy.gif)
+![Screenshot](http://i.giphy.com/26ufdIKAY10kArl5e.gif)
 
 A basic React native app, with the purpose of displaying addresses of friends.
 
